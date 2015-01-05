@@ -1,0 +1,13 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jamescha.finalproject.FitnessFragment">
+
+    <ListView
+        android:id="@+id/listview_fitness_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>
+<!-- From: file:/Users/jamescha/AndroidStudioProjects/FinalProject/app/src/main/res/layout/fragment_main.xml -->
