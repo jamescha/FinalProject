@@ -55,7 +55,7 @@ public class FitnessFragment extends Fragment implements LoaderCallbacks<Cursor>
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.i(LOG_TAG, "Create Fitness Fragment View")
+        Log.i(LOG_TAG, "Create Fitness Fragment View");
         mFitnessAdapter = new FitnessAdapter(getActivity(), null, 0);
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
@@ -85,7 +85,7 @@ public class FitnessFragment extends Fragment implements LoaderCallbacks<Cursor>
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String sortOrder = null;
         Log.i(LOG_TAG, "Create Loader");
-        Uri stepsUri = FitnessContract.StepsEntry.buildStepsUri(id);
+        Uri stepsUri = FitnessContract.StepsEntry.CONTENT_URI;
 
         return new CursorLoader(getActivity(), stepsUri, STEPS_COLUMNS, null, null, sortOrder);
     }

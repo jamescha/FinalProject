@@ -120,7 +120,7 @@ public class FitnessProvider extends ContentProvider {
             case STEPS:
                 return FitnessContract.StepsEntry.CONTENT_TYPE;
             case STEPS_ID:
-                return FitnessContract.StepsEntry.CONTENT_TYPE;
+                return FitnessContract.StepsEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }

@@ -8,5 +8,6 @@
     <!-- SyncAdapter related -->
     <string name="sync_account_type">finalproject.jamescha.example.com</string>
     <string name="content_authority">com.example.jamescha.finalproject</string>
+    <string name="title_activity_character">CharacterActivity</string>
 
 </resources>

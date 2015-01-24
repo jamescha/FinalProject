@@ -1705,7 +1705,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a0042;
         public static final int action_mode_bar_stub=0x7f0a0041;
         public static final int action_mode_close_button=0x7f0a0034;
-        public static final int action_settings=0x7f0a0056;
+        public static final int action_settings=0x7f0a005a;
         public static final int activity_chooser_view_content=0x7f0a0035;
         public static final int adjust_height=0x7f0a0016;
         public static final int adjust_width=0x7f0a0017;
@@ -1715,6 +1715,9 @@ containing a value of this type.
         public static final int buyButton=0x7f0a0028;
         public static final int buy_now=0x7f0a002c;
         public static final int buy_with_google=0x7f0a002d;
+        public static final int character_exp=0x7f0a0056;
+        public static final int character_level=0x7f0a0057;
+        public static final int character_name=0x7f0a0055;
         public static final int checkbox=0x7f0a003d;
         public static final int classic=0x7f0a002f;
         public static final int collapseActionView=0x7f0a001c;
@@ -1728,7 +1731,8 @@ containing a value of this type.
         public static final int end=0x7f0a0014;
         public static final int expand_activities_button=0x7f0a0036;
         public static final int expanded_menu=0x7f0a003c;
-        public static final int fragment_fitness=0x7f0a0053;
+        public static final int fragment_fitness=0x7f0a0054;
+        public static final int fragment_fitness2=0x7f0a0053;
         public static final int grayscale=0x7f0a0030;
         public static final int holo_dark=0x7f0a0023;
         public static final int holo_light=0x7f0a0024;
@@ -1740,8 +1744,8 @@ containing a value of this type.
         public static final int image=0x7f0a0037;
         public static final int listMode=0x7f0a0009;
         public static final int list_item=0x7f0a0039;
-        public static final int list_item_textview=0x7f0a0055;
-        public static final int listview_fitness_data=0x7f0a0054;
+        public static final int list_item_textview=0x7f0a0059;
+        public static final int listview_fitness_data=0x7f0a0058;
         public static final int match_parent=0x7f0a002a;
         public static final int middle=0x7f0a0015;
         public static final int monochrome=0x7f0a0031;
@@ -1808,13 +1812,16 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030014;
         public static final int abc_search_view=0x7f030015;
         public static final int abc_simple_dropdown_hint=0x7f030016;
-        public static final int activity_main=0x7f030017;
-        public static final int fragment_main=0x7f030018;
-        public static final int list_fitness_data=0x7f030019;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001a;
+        public static final int activity_character=0x7f030017;
+        public static final int activity_main=0x7f030018;
+        public static final int fragment_character=0x7f030019;
+        public static final int fragment_main=0x7f03001a;
+        public static final int list_fitness_data=0x7f03001b;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
     }
     public static final class menu {
-        public static final int menu_main=0x7f0e0000;
+        public static final int menu_character=0x7f0e0000;
+        public static final int menu_main=0x7f0e0001;
     }
     public static final class raw {
         public static final int gtm_analytics=0x7f060000;
@@ -1876,7 +1883,8 @@ containing a value of this type.
         public static final int store_picture_message=0x7f0c0035;
         public static final int store_picture_title=0x7f0c0036;
         public static final int sync_account_type=0x7f0c0037;
-        public static final int wallet_buy_button_place_holder=0x7f0c0038;
+        public static final int title_activity_character=0x7f0c0038;
+        public static final int wallet_buy_button_place_holder=0x7f0c0039;
     }
     public static final class style {
         /**  Customize your theme here. 

@@ -23,7 +23,7 @@ public class FitnessDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_STEPS_TABLE = "CREATE TABLE " + StepsEntry.TABLE_NAME + " (" +
                 StepsEntry._ID + " INTEGER PRIMARY KEY, " +
-                StepsEntry.COLUMN_STEPS_DATE + " TEXT NOT NULL, " +
+                StepsEntry.COLUMN_STEPS_DATE + " TEXT UNIQUE NOT NULL, " +
                 StepsEntry.COLUMN_STEPS_COUNT + " INTEGER NOT NULL" +
                 " );";
 

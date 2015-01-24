@@ -44,6 +44,7 @@ public class FitnessAdapter extends CursorAdapter{
                 break;
             }
             case VIEW_TYPE_CHARACTER: {
+                layoutId = R.layout.fragment_character;
                 break;
             }
         }
@@ -59,18 +60,19 @@ public class FitnessAdapter extends CursorAdapter{
         ViewHolder viewHolder = (ViewHolder) view.getTag();
         int viewType = getItemViewType(cursor.getPosition());
 
-        Integer vT = viewType;
-
-        Log.i("FitnessAdapter BindView", vT.toString());
-
         switch (viewType) {
             case VIEW_TYPE_STEPS: {
+                String textString = cursor.getString(FitnessFragment.COL_STEPS_COUNT);
+                String dateString = cursor.getString(FitnessFragment.COL_STEPS_DATE);
+
+                viewHolder.textView.setText(dateString + " " + textString + " Steps");
+            }
+            case VIEW_TYPE_CHARACTER: {
 
             }
         }
 
-        String textString = cursor.getString(FitnessFragment.COL_STEPS_COUNT);
-        viewHolder.textView.setText(textString);
+
     }
 
     @Override

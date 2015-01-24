@@ -45,15 +45,11 @@ public class MainActivity extends ActionBarActivity implements FitnessFragment.C
 
         buildFitnessClient();
 
-                if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_fitness, new FitnessFragment())
-                    .commit();
-        }
-
-
-
-
+//                if (savedInstanceState == null) {
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.fragment_fitness, new FitnessFragment())
+//                    .commit();
+//        }
     }
 
     @Override
@@ -72,7 +68,14 @@ public class MainActivity extends ActionBarActivity implements FitnessFragment.C
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+
+            CharacterFragment characterFragment = new CharacterFragment();
+
+            Log.i(LOG_TAG, "Setting Button Pressed");
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.fragment_fitness, characterFragment).commit();
+            Intent intent = new Intent(this, CharacterActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

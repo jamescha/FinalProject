@@ -63,6 +63,11 @@
             android:authorities="@string/content_authority"
             android:exported="false"
             android:syncable="true" />
+
+        <activity
+            android:name="com.example.jamescha.finalproject.CharacterActivity"
+            android:label="@string/title_activity_character" >
+        </activity>
     </application>
 
 </manifest>

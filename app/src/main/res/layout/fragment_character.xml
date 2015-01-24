@@ -1,0 +1,31 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jamescha.finalproject.CharacterFragment">
+
+ <!--   <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/character_image"/>
+-->
+    <TextView android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/character_name"
+        android:text="Hero"/>
+
+    <TextView
+        android:layout_width="274dp"
+        android:layout_height="458dp"
+        android:id="@+id/character_exp"
+        android:text="500/1000"
+        android:layout_gravity="center_horizontal|top" />
+
+    <TextView
+        android:layout_width="215dp"
+        android:layout_height="458dp"
+        android:id="@+id/character_level"
+        android:text="Level 10"
+        android:layout_gravity="right|top" />
+
+</FrameLayout>

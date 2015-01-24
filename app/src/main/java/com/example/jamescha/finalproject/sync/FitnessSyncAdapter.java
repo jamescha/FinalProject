@@ -17,6 +17,7 @@ import com.example.jamescha.finalproject.R;
 import com.example.jamescha.finalproject.data.FitnessContract;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.fitness.Fitness;
+import com.google.android.gms.fitness.data.Bucket;
 import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.fitness.data.DataSet;
 import com.google.android.gms.fitness.data.DataType;
@@ -60,31 +61,39 @@ public class FitnessSyncAdapter extends AbstractThreadedSyncAdapter {
         long endTime = cal.getTimeInMillis();
         cal.add(Calendar.MONTH, -1);
         long startTime = cal.getTimeInMillis();
+        Integer stepsSum = 0;
 
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         Log.i(LOG_TAG, "Range Start: " + dateFormat.format(startTime));
         Log.i(LOG_TAG, "Range End: " + dateFormat.format(endTime));
 
         DataReadRequest readRequest = new DataReadRequest.Builder()
-                .read(DataType.TYPE_STEP_COUNT_CUMULATIVE)
+                //.read(DataType.TYPE_STEP_COUNT_CUMULATIVE)
+                .aggregate(DataType.TYPE_STEP_COUNT_DELTA, DataType.AGGREGATE_STEP_COUNT_DELTA)
+                        // Analogous to a "Group By" in SQL, defines how data should be aggregated.
+                        // bucketByTime allows for a time span, whereas bucketBySession would allow
+                        // bucketing by "sessions", which would need to be defined in code.
+                .bucketByTime(1, TimeUnit.DAYS)
                 .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
                 .build();
 
         Log.i(LOG_TAG, "Request Created");
         DataReadResult dataReadResult = Fitness.HistoryApi.readData(mClient, readRequest).await(1, TimeUnit.MINUTES);
 
-        Vector<ContentValues> contentValuesVector = new Vector<ContentValues>(dataReadResult.getDataSets().size());
+        Vector<ContentValues> contentValuesVector = new Vector<>(dataReadResult.getDataSets().size());
 
-        DataSet dataSet = dataReadResult.getDataSets().get(0);
+        for (Bucket bucket: dataReadResult.getBuckets()) {
+            for (DataSet dataSet : bucket.getDataSets()) {
+                for (DataPoint dataPoint : dataSet.getDataPoints()) {
 
-        for(DataPoint dataPoint : dataSet.getDataPoints()) {
+                    ContentValues fitnessValues = new ContentValues();
 
-            ContentValues fitnessValues = new ContentValues();
-
-            fitnessValues.put(FitnessContract.StepsEntry.COLUMN_STEPS_DATE, dateFormat.format(dataPoint.getStartTime(TimeUnit.MILLISECONDS)));
-            fitnessValues.put(FitnessContract.StepsEntry.COLUMN_STEPS_COUNT, dataPoint.getValue(dataPoint.getDataType().getFields().get(0)).asInt());
-
-            contentValuesVector.add(fitnessValues);
+                    fitnessValues.put(FitnessContract.StepsEntry.COLUMN_STEPS_DATE, dateFormat.format(dataPoint.getEndTime(TimeUnit.MILLISECONDS)));
+                    fitnessValues.put(FitnessContract.StepsEntry.COLUMN_STEPS_COUNT, dataPoint.getValue(dataPoint.getDataType().getFields().get(0)).asInt());
+                    stepsSum += dataPoint.getValue(dataPoint.getDataType().getFields().get(0)).asInt();
+                    contentValuesVector.add(fitnessValues);
+                }
+            }
         }
 
         if (contentValuesVector.size() > 0) {
@@ -93,6 +102,14 @@ public class FitnessSyncAdapter extends AbstractThreadedSyncAdapter {
             getContext().getContentResolver().bulkInsert(FitnessContract.StepsEntry.CONTENT_URI, contentValueses);
         }
 
+
+        ContentValues tempValues = new ContentValues();
+        tempValues.put(FitnessContract.CharacterEntry.COLUMN_CHARACTER_NAME, "Hero");
+        tempValues.put(FitnessContract.CharacterEntry.COLUMN_CHARACTER_LEVEL, 100);
+        tempValues.put(FitnessContract.CharacterEntry.COLUMN_CHARACTER_EXP, stepsSum);
+
+
+        getContext().getContentResolver().insert(FitnessContract.CharacterEntry.CONTENT_URI,tempValues);
         Log.d(LOG_TAG, "Fitness Synced " + contentValuesVector.size() + " added.");
 
     }
