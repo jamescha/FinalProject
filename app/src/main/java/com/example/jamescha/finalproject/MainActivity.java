@@ -31,6 +31,7 @@ public class MainActivity extends ActionBarActivity implements FitnessFragment.C
     private boolean authInProgress = false;
 
     private GoogleApiClient mClient = null;
+    private boolean mTwoPane;
 
 
     @Override
@@ -39,17 +40,28 @@ public class MainActivity extends ActionBarActivity implements FitnessFragment.C
         setContentView(R.layout.activity_main);
 
 
+        if(findViewById(R.id.fragment_fitness2) != null) {
+            mTwoPane = true;
+
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_fitness2, new CharacterFragment())
+                    .commit();
+            }
+        } else {
+            mTwoPane = false;
+        }
+
         if (savedInstanceState != null) {
             authInProgress = savedInstanceState.getBoolean(AUTH_PENDING);
         }
 
+        FitnessFragment fitnessFragment = ((FitnessFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_fitness));
+        fitnessFragment.setUseLayout(!mTwoPane);
+
         buildFitnessClient();
 
-//                if (savedInstanceState == null) {
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.fragment_fitness, new FitnessFragment())
-//                    .commit();
-//        }
+
     }
 
     @Override
@@ -69,13 +81,13 @@ public class MainActivity extends ActionBarActivity implements FitnessFragment.C
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            CharacterFragment characterFragment = new CharacterFragment();
+            //CharacterFragment characterFragment = new CharacterFragment();
 
             Log.i(LOG_TAG, "Setting Button Pressed");
 //            getSupportFragmentManager().beginTransaction()
 //                    .replace(R.id.fragment_fitness, characterFragment).commit();
-            Intent intent = new Intent(this, CharacterActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, CharacterActivity.class));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

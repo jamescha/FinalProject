@@ -18,6 +18,8 @@ public class FitnessAdapter extends CursorAdapter{
     private static final int VIEW_TYPE_CHARACTER = 1;
     private static final int VIEW_TYPE_COUNT = 2;
 
+    private boolean mUseLayout = true;
+
     public static class ViewHolder {
 
         public final TextView textView;
@@ -78,5 +80,9 @@ public class FitnessAdapter extends CursorAdapter{
     @Override
     public int getViewTypeCount() {
         return VIEW_TYPE_COUNT;
+    }
+
+    public void setUseLayout(boolean useLayout) {
+        mUseLayout = useLayout;
     }
 }

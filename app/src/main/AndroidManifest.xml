@@ -60,7 +60,8 @@
 
         <activity
             android:name=".CharacterActivity"
-            android:label="@string/title_activity_character" >
+            android:label="@string/title_activity_character"
+            android:configChanges="orientation|keyboardHidden">
         </activity>
     </application>
 

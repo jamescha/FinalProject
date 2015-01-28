@@ -29,7 +29,7 @@ public class FitnessDbHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_CHARACTER_TABLE = "CREATE TABLE " + CharacterEntry.TABLE_NAME + " (" +
                 CharacterEntry._ID + " INTEGER PRIMARY KEY, " +
-                CharacterEntry.COLUMN_CHARACTER_NAME + " TEXT UNIQUE NOT NULL, " +
+                CharacterEntry.COLUMN_CHARACTER_NAME + " TEXT NOT NULL, " +
                 CharacterEntry.COLUMN_CHARACTER_LEVEL + " INTEGER NOT NULL, " +
                 CharacterEntry.COLUMN_CHARACTER_EXP + " INTEGER NOT NULL" +
                 " );";

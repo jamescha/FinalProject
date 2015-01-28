@@ -39,7 +39,8 @@ public class CharacterFragment extends Fragment implements LoaderCallbacks<Curso
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
+        Log.i(LOG_TAG, "CharacterFragment ActivityCreated");
         super.onCreate(savedInstanceState);
     }
 
@@ -48,7 +49,7 @@ public class CharacterFragment extends Fragment implements LoaderCallbacks<Curso
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_character, container, false);
-        Log.i(LOG_TAG, "CharacterFragment");
+        Log.i(LOG_TAG, "CharacterFragment View Created");
 
      //   mCharacterImage = (ImageView) rootView.findViewById(R.id.character_image);
         mCharacterName = (TextView) rootView.findViewById(R.id.character_name);
@@ -71,7 +72,9 @@ public class CharacterFragment extends Fragment implements LoaderCallbacks<Curso
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        Log.i(LOG_TAG, "CharacterFragment Loader Created");
         String sortOrder = null;
+
 
         return new CursorLoader(
                 getActivity(),

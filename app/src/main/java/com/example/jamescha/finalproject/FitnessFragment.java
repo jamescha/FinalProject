@@ -19,6 +19,7 @@ public class FitnessFragment extends Fragment implements LoaderCallbacks<Cursor>
 
     private final String LOG_TAG = FitnessFragment.class.getSimpleName();
     private FitnessAdapter mFitnessAdapter;
+    private boolean mUseLayout;
     ListView mListView;
 
     private static final int FITNESS_LOADER = 0;
@@ -64,6 +65,8 @@ public class FitnessFragment extends Fragment implements LoaderCallbacks<Cursor>
         mListView = (ListView) rootView.findViewById(R.id.listview_fitness_data);
         mListView.setAdapter(mFitnessAdapter);
 
+        mFitnessAdapter.setUseLayout(mUseLayout);
+
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -98,5 +101,12 @@ public class FitnessFragment extends Fragment implements LoaderCallbacks<Cursor>
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mFitnessAdapter.swapCursor(null);
+    }
+
+    public void setUseLayout(boolean useLayout) {
+        mUseLayout = useLayout;
+        if (mFitnessAdapter != null) {
+            mFitnessAdapter.setUseLayout(mUseLayout);
+        }
     }
 }
