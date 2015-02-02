@@ -62,12 +62,18 @@ public class FitnessAdapter extends CursorAdapter{
         ViewHolder viewHolder = (ViewHolder) view.getTag();
         int viewType = getItemViewType(cursor.getPosition());
 
+
+
         switch (viewType) {
             case VIEW_TYPE_STEPS: {
-                String textString = cursor.getString(FitnessFragment.COL_STEPS_COUNT);
-                String dateString = cursor.getString(FitnessFragment.COL_STEPS_DATE);
+                if (cursor.getCount() == 0) {
+                    viewHolder.textView.setText("You have no step data!");
+                } else {
+                    String textString = cursor.getString(FitnessFragment.COL_STEPS_COUNT);
+                    String dateString = cursor.getString(FitnessFragment.COL_STEPS_DATE);
 
-                viewHolder.textView.setText(dateString + " " + textString + " Steps");
+                    viewHolder.textView.setText(dateString + " " + textString + " Steps");
+                }
             }
             case VIEW_TYPE_CHARACTER: {
 
