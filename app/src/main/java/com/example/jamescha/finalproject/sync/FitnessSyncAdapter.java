@@ -39,6 +39,7 @@ public class FitnessSyncAdapter extends AbstractThreadedSyncAdapter {
 
     private final String LOG_TAG = FitnessSyncAdapter.class.getSimpleName();
     private static GoogleApiClient mClient = null;
+    private Boolean alreadyInserted = true;
 
     // Interval at which to sync with the weather, in milliseconds.
     // 60 seconds (1 minute) * 180 = 3 hours
@@ -62,6 +63,8 @@ public class FitnessSyncAdapter extends AbstractThreadedSyncAdapter {
         cal.add(Calendar.MONTH, -1);
         long startTime = cal.getTimeInMillis();
         Integer stepsSum = 0;
+
+
 
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         Log.i(LOG_TAG, "Range Start: " + dateFormat.format(startTime));
@@ -100,6 +103,14 @@ public class FitnessSyncAdapter extends AbstractThreadedSyncAdapter {
             ContentValues[] contentValueses = new ContentValues[contentValuesVector.size()];
             contentValuesVector.toArray(contentValueses);
             getContext().getContentResolver().bulkInsert(FitnessContract.StepsEntry.CONTENT_URI, contentValueses);
+        }
+
+        if(contentValuesVector.size() == 0 && alreadyInserted) {
+            ContentValues contentValue = new ContentValues(1);
+            contentValue.put(FitnessContract.StepsEntry.COLUMN_STEPS_DATE, dateFormat.format(new Date(System.currentTimeMillis())));
+            contentValue.put(FitnessContract.StepsEntry.COLUMN_STEPS_COUNT, -1);
+            getContext().getContentResolver().insert(FitnessContract.StepsEntry.CONTENT_URI, contentValue);
+            alreadyInserted = false;
         }
 
 

@@ -18,6 +18,8 @@ public class FitnessAdapter extends CursorAdapter{
     private static final int VIEW_TYPE_CHARACTER = 1;
     private static final int VIEW_TYPE_COUNT = 2;
 
+    private final String LOG_TAG = FitnessAdapter.class.getSimpleName();
+
     private boolean mUseLayout = true;
 
     public static class ViewHolder {
@@ -38,7 +40,7 @@ public class FitnessAdapter extends CursorAdapter{
         int viewType = getItemViewType(cursor.getPosition());
         Integer vT = viewType;
 
-        Log.i("FitnessAdapter", vT.toString());
+        Log.i(LOG_TAG, vT.toString());
         int layoutId = -1;
         switch (viewType) {
             case VIEW_TYPE_STEPS: {
@@ -62,11 +64,10 @@ public class FitnessAdapter extends CursorAdapter{
         ViewHolder viewHolder = (ViewHolder) view.getTag();
         int viewType = getItemViewType(cursor.getPosition());
 
-
-
         switch (viewType) {
             case VIEW_TYPE_STEPS: {
-                if (cursor.getCount() == 0) {
+                Log.i(LOG_TAG, "Cursor count is " + cursor.getCount());
+                if (cursor.getInt(FitnessFragment.COL_STEPS_COUNT) == -1) {
                     viewHolder.textView.setText("You have no step data!");
                 } else {
                     String textString = cursor.getString(FitnessFragment.COL_STEPS_COUNT);
